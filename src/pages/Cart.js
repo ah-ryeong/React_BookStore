@@ -1,4 +1,16 @@
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+
+let Btn = styled.button`
+    background : ${ props => props.bg };
+    color : ${ props => props.bg == 'blue' ? 'white' : 'black' };
+    padding : 10px;
+`
+
+let box = styled.div`
+    background : grey;
+    padding : 20px;
+`
 
 function Cart(props) {
 
@@ -19,6 +31,7 @@ function Cart(props) {
                     <p>{ 찾은상품.content }</p>
                     <p>{ 찾은상품.price }원</p>
                     <button className="btn btn-danger">주문하기</button>
+                    {/* <Btn bg="blue" >버튼</Btn> */}
                 </div>
             </div>
         </div>
