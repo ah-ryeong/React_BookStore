@@ -1,4 +1,6 @@
 import './App.css';
+import { useState } from 'react';
+import data from './data.js';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
 import Main from './pages/Main.js';
@@ -6,6 +8,7 @@ import Cart from './pages/Cart';
 
 function App() {
 
+  let [book] = useState(data);
   // 페이지 이동 도와줌
   let navigate = useNavigate();
 
@@ -25,8 +28,8 @@ function App() {
         </Navbar>
 
         <Routes>
-          <Route path="/" element = {<Main />} />
-          <Route path="/cart" element = {<Cart />} />
+          <Route path="/" element = {<Main book = { book }/>} />
+          <Route path="/cart/:id" element = {<Cart book = { book }/>} />
 
           <Route path="/event" element = {<Event />}>
             <Route path="one" element = { <div>첫 주문시 책갈피 증정</div> } />

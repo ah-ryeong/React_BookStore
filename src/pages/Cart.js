@@ -1,15 +1,23 @@
-function Cart() {
+import { useParams } from 'react-router-dom';
+
+function Cart(props) {
+
+    let {id} = useParams();
+    let 찾은상품 = props.book.find(function(x){
+        return x.id == id
+    });
+
     return (
         <div className="container">
             <div className="row">
                 <div className="col-md-6">
-                    <img src = "http://image.kyobobook.co.kr/images/book/large/447/l9791186602447.jpg" />
+                    <img src = { 찾은상품.img} />
                 </div>
 
                 <div className="col-md-6">
-                    <h4 ClassName="pt-5">상품명</h4>
-                    <p>상품 설명</p>
-                    <p>가격</p>
+                    <h4 ClassName="pt-5">{ 찾은상품.title }</h4>
+                    <p>{ 찾은상품.content }</p>
+                    <p>{ 찾은상품.price }원</p>
                     <button className="btn btn-danger">주문하기</button>
                 </div>
             </div>

@@ -1,10 +1,6 @@
 import '../App.css';
-import { useState } from 'react';
-import data from '../data.js';
 
-function Main() {
-
-    let [book] = useState(data);
+function Main(props) {
 
     return (
         <>
@@ -14,8 +10,8 @@ function Main() {
                 <div className="row">
                   
                   {
-                    book.map((a, i) => {
-                      return <Card book = {book[i]} i ={i}></Card>
+                    props.book.map((a, i) => {
+                      return <Card book = {props.book[i]} i ={i}></Card>
                     })
                   }
 
