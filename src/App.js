@@ -8,7 +8,7 @@ import Cart from './pages/Cart';
 
 function App() {
 
-  let [book] = useState(data);
+  let [book, setBook] = useState(data);
   // 페이지 이동 도와줌
   let navigate = useNavigate();
 
@@ -28,7 +28,7 @@ function App() {
         </Navbar>
 
         <Routes>
-          <Route path="/" element = {<Main book = { book }/>} />
+          <Route path="/" element = {<Main book = { book } setBook ={setBook}/>} />
           <Route path="/cart/:id" element = {<Cart book = { book }/>} />
 
           <Route path="/event" element = {<Event />}>
@@ -45,6 +45,7 @@ function App() {
           
           <Route path="/*" element = { <div>없는 페이지입니다.</div> } />
         </Routes>
+        
 
     </div>
   );

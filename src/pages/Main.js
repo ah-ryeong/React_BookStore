@@ -1,4 +1,5 @@
 import '../App.css';
+import axios from 'axios';
 
 function Main(props) {
 
@@ -17,6 +18,26 @@ function Main(props) {
 
                 </div>
               </div>
+
+              <button onClick = {() => {
+                // ajax
+                axios.get('http://codingapple1.github.io/shop/data2.json')
+                .then((결과)=>{ 
+                  console.log(결과.data)
+                  let copy = [...props.book, ...결과.data];
+                  props.setBook(copy);
+                 })
+                .catch(()=>{
+                  console.log('실패했습니다')
+                })
+
+                axios.post('/sample', {name : 'kim'})
+
+                Promise.all([ axios.get('/url1'), axios.get('/url2') ])
+                .then(()=>{
+                  
+                })
+              }} >더보기</button>
             </>
     );
 }
