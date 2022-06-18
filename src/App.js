@@ -1,14 +1,18 @@
 import './App.css';
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import data from './data.js';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
 import Main from './pages/Main.js';
 import Cart from './pages/Cart';
 
+// context 세팅 (context = state 보관함)
+export let Context1 = createContext();
+
 function App() {
 
   let [book, setBook] = useState(data);
+  let [재고] = useState([10, 11, 12]);
   // 페이지 이동 도와줌
   let navigate = useNavigate();
 
@@ -29,7 +33,11 @@ function App() {
 
         <Routes>
           <Route path="/" element = {<Main book = { book } setBook ={setBook}/>} />
-          <Route path="/cart/:id" element = {<Cart book = { book }/>} />
+          <Route path="/cart/:id" element = {
+            <Context1.Provider value={ { 재고, book } }>
+              <Cart book = { book }/>
+            </Context1.Provider>
+          } />
 
           <Route path="/event" element = {<Event />}>
             <Route path="one" element = { <div>첫 주문시 책갈피 증정</div> } />

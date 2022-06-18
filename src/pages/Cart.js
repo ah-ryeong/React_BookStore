@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { Context1 } from './../App.js';
 
 let Btn = styled.button`
     background : ${ props => props.bg };
@@ -65,7 +67,7 @@ function Cart(props) {
                 : null
             }
 
-            <div className="row">
+            <div className="row mb-5">
                 <div className="col-md-6">
                     <img src = { 찾은상품.img} />
                 </div>
@@ -112,6 +114,9 @@ function TabContent({탭}) {
 
     let [fade, setFade] = useState('');
 
+    // state 사용은 useContext(Context) - > 보관함 해체해줌
+    let { 재고, book } = useContext(Context1);
+
     useEffect(() => {
         // react의 automatic batching 기능
         setTimeout(() => { setFade('end') }, 100)
@@ -122,7 +127,7 @@ function TabContent({탭}) {
     }, [탭]);
 
     return (<div className={ `start ${fade}` }>
-        { [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭] }
+        { [<div>{재고}</div>, <div>내용1</div>, <div>내용2</div>][탭] }
     </div>)
 }
 
