@@ -5,6 +5,7 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
 import Main from './pages/Main.js';
 import Cart from './pages/Cart';
+import Basket from './pages/Basket';
 
 // context 세팅 (context = state 보관함)
 export let Context1 = createContext();
@@ -52,6 +53,8 @@ function App() {
           </Route>
           
           <Route path="/*" element = { <div>없는 페이지입니다.</div> } />
+
+          <Route path='/basket' element = {<Basket />} />
         </Routes>
         
 
