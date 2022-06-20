@@ -1,6 +1,18 @@
 import { Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 function Basket() {
+
+    // redux store의 state 꺼내기
+    let 전체 = useSelector((state) => {
+        return state
+    });
+
+    let stock = useSelector((state) => {
+        return state.stock
+    });
+    console.log(전체.user);
+    console.log(stock);
 
     return(
         <div>
