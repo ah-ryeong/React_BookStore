@@ -1,12 +1,14 @@
 import { Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { changeName } from "./store";
 
 function Basket() {
 
     // redux store의 state 꺼내기
-    let state = useSelector((state) => {
-        return state
-    });
+    let state = useSelector((state) => state);
+
+    // store.js 로 요청보내주는 함수
+    let dispatch = useDispatch();
 
     // let stock = useSelector((state) => {
     //     return state.stock
@@ -16,6 +18,8 @@ function Basket() {
 
     return(
         <div>
+            {state.user}의 장바구니
+
             <Table>
                 <thead>
                     <tr>
@@ -32,8 +36,12 @@ function Basket() {
                         <tr key={i}>
                             <td>{i+1}</td>
                             <td>{state.cart[i].name}</td>
-                            <td>안녕</td>
-                            <td>안녕</td>
+                            <td>{state.cart[i].count}</td>
+                            <td>
+                                <button onClick = { () => {
+                                    dispatch(changeName())
+                                }}>+</button>
+                            </td>
                         </tr>
                         )
                     }
