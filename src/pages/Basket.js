@@ -4,15 +4,15 @@ import { useSelector } from "react-redux";
 function Basket() {
 
     // redux store의 state 꺼내기
-    let 전체 = useSelector((state) => {
+    let state = useSelector((state) => {
         return state
     });
 
-    let stock = useSelector((state) => {
-        return state.stock
-    });
-    console.log(전체.user);
-    console.log(stock);
+    // let stock = useSelector((state) => {
+    //     return state.stock
+    // });
+    console.log(state.cart[0]);
+    // console.log(stock);
 
     return(
         <div>
@@ -27,12 +27,17 @@ function Basket() {
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>안녕</td>
-                        <td>안녕</td>
-                        <td>안녕</td>
-                    </tr>
+                    {
+                        state.cart.map((a, i) => 
+                        <tr key={i}>
+                            <td>{i+1}</td>
+                            <td>{state.cart[i].name}</td>
+                            <td>안녕</td>
+                            <td>안녕</td>
+                        </tr>
+                        )
+                    }
+                    
                 </tbody>
             </Table>
         </div>
