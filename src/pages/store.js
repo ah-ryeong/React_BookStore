@@ -4,18 +4,23 @@ import { configureStore, createSlice } from '@reduxjs/toolkit'
 // useState 같은거
 let user = createSlice({
   name: `user`,
-  initialState: 'kim',
+  initialState: { name : 'kim', age : 20 },
 
   // 1. state 수정해주는 함수 만들기 -> 이후에 원할 때 그 함수 실행해달라고 store.js에 요청해야함
   reducers : {
     changeName(state) {
-      return 'john ' + state
+      // array or object 의 경우 직접수정해도 state 변경됨
+      state.name = 'park'
+    },
+
+    increase(state, action) {
+      state.age += action.payload
     }
   }
 });
 
 // 2. 함수 export 하기 
-export let { changeName } = user.actions;
+export let { changeName, increase } = user.actions;
 
 let stock = createSlice({
   name: `stock`,
