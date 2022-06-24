@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { useDispatch } from 'react-redux';
 import { Context1 } from './../App.js';
+import { addItem } from './store.js';
 
 let Btn = styled.button`
     background : ${ props => props.bg };
@@ -57,6 +58,8 @@ function Cart(props) {
     let [alert, setAlert] = useState(true);
     let [탭, 탭변경] = useState(0);
 
+    let dispatch = useDispatch();
+
     return (
         <div className="container">
             {
@@ -76,7 +79,9 @@ function Cart(props) {
                     <h4 ClassName="pt-5">{ 찾은상품.title }</h4>
                     <p>{ 찾은상품.content }</p>
                     <p>{ 찾은상품.price }원</p>
-                    <button className="btn btn-danger">주문하기</button>
+                    <button className="btn btn-danger" onClick={() => {
+                        dispatch( addItem({ id : 1, name : '아무튼, 비건', count : 1 }) )
+                    }}>주문하기</button>
                     {/* <Btn bg="blue" >버튼</Btn> */}
                 </div>
             </div>
