@@ -60,6 +60,19 @@ function Cart(props) {
 
     let dispatch = useDispatch();
 
+    useEffect(()=> {
+        // console.log(찾은상품.id);
+        let 꺼낸것 = localStorage.getItem('watched');
+        꺼낸것 = JSON.parse(꺼낸것);
+        꺼낸것.push(찾은상품.id);
+
+        // 중복제거
+        꺼낸것 = new Set(꺼낸것);
+        꺼낸것 = Array.from(꺼낸것);
+
+        localStorage.setItem('watched', JSON.stringify(꺼낸것));
+    }, []);
+
     return (
         <div className="container">
             {

@@ -1,5 +1,5 @@
 import './App.css';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import data from './data.js';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
@@ -18,6 +18,10 @@ function App() {
   // let 꺼낸것 = localStorage.getItem('data');
   // console.log(JSON.parse(꺼낸것));
   // console.log(JSON.parse(꺼낸것).name);
+
+  useEffect(() => {
+    localStorage.setItem('watched', JSON.stringify([]))
+  }, []);
 
   let [book, setBook] = useState(data);
   let [재고] = useState([10, 11, 12]);
