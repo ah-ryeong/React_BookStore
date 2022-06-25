@@ -12,6 +12,13 @@ export let Context1 = createContext();
 
 function App() {
 
+  // array  나 object 자료 서버없이 저장
+  // let obj = { name :  'kim' }
+  // localStorage.setItem('data', JSON.stringify(obj));
+  // let 꺼낸것 = localStorage.getItem('data');
+  // console.log(JSON.parse(꺼낸것));
+  // console.log(JSON.parse(꺼낸것).name);
+
   let [book, setBook] = useState(data);
   let [재고] = useState([10, 11, 12]);
   // 페이지 이동 도와줌
