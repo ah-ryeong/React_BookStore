@@ -6,6 +6,8 @@ import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
 import Main from './pages/Main.js';
 import Cart from './pages/Cart';
 import Basket from './pages/Basket';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
 // context 세팅 (context = state 보관함)
 export let Context1 = createContext();
@@ -20,13 +22,35 @@ function App() {
   // console.log(JSON.parse(꺼낸것).name);
 
   useEffect(() => {
-    localStorage.setItem('watched', JSON.stringify([]))
+    localStorage.setItem('watched', JSON.stringify([]));
+
+    // 이미 watched 항목이 있는 경우, setItem 하지 않도록 하기
+    
   }, []);
 
   let [book, setBook] = useState(data);
   let [재고] = useState([10, 11, 12]);
   // 페이지 이동 도와줌
   let navigate = useNavigate();
+
+  // ajax 요청
+  let result = useQuery('작명', () => {
+    return axios.get('https://codingapple1.github.io/userdata.json').then((a)=>{
+      // 2. 틈만나면 자동으로 재요청함(자동으로 refetch해줌)
+      console.log('요청됨');
+      return a.data;
+    }),
+    // refetch 설정
+    { staleTime : 2000 }
+  });
+
+  // useQuery 장점 
+  // 1. 성공/실패/로딩중 쉽게 파악이 가능
+  // result.data;
+  // result.isLoading;
+  // result.error;
+  // 3. state 공유 안 해도 됨 
+  // 4. ajax 결과 캐싱가능
 
   return (
     <div className="App">
@@ -39,6 +63,10 @@ function App() {
             <Nav.Link onClick ={ () => { navigate('/cart') } }>Cart</Nav.Link>
             <Nav.Link onClick ={ () => { navigate('/event') } }>Event</Nav.Link>
             <Nav.Link onClick ={ () => { navigate('/about') } }>About</Nav.Link>
+          </Nav>
+          <Nav className='ms-auto'>
+            { result.isLoading ? '로딩중' : result.data.name }
+            { result.error && 'error'  }
           </Nav>
           </Container>
         </Navbar>
