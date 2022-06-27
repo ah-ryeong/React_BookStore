@@ -1,5 +1,5 @@
 import './App.css';
-import { createContext, useEffect, useState } from 'react';
+import { lazy, createContext, useEffect, useState } from 'react';
 import data from './data.js';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
@@ -11,6 +11,9 @@ import axios from 'axios';
 
 // context 세팅 (context = state 보관함)
 export let Context1 = createContext();
+
+// const Basket = lazy(() => import('./routes/Basket.js'))
+// const Cart = lazy(() => import('./routes/Cart.js'))
 
 function App() {
 
